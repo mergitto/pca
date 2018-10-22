@@ -6,27 +6,26 @@ from matplotlib import pyplot as plt
 from sklearn.decomposition import PCA
 import pickle
 
-def loadVectorSum(pathName):
-    with open(pathName, 'rb') as f:
+def load_pickle(import_file_name):
+    with open(import_file_name, 'rb') as f:
         return pickle.load(f)
 
+def pca_transformed(vector):
+     # 主成分分析する
+     pca = PCA(n_components=2)
+     pca.fit(vector)
+     # 分析結果を元にデータセットを主成分に変換する
+     transformed = pca.fit_transform(vector)
+     return pca, transformed
+
 def main():
-    inputF = np.array(loadVectorSum('file_name')) # 入力のベクトル
-    sugDocHigh = np.array(loadVectorSum('file_name')) # 適合報告書のベクトル和
-    sugDocLow = np.array(loadVectorSum('file_name')) # 非適合報告書のベクトル和
+    input_word = reports_vector['input_word'] # 入力のベクトル
+    high_report = reports_vector['high'] # 適合報告書のベクトル和
+    low_report = reports_vector['low'] # 非適合報告書のベクトル和
 
-    # 主成分分析する
-    pca = PCA()
-    pca.fit(inputF)
-    pca1 = PCA(n_components=2)
-    pca1.fit(sugDocHigh)
-    pca2 = PCA(n_components=2)
-    pca2.fit(sugDocLow)
-
-    # 分析結果を元にデータセットを主成分に変換する
-    transformed = pca.fit_transform(inputF)
-    transformed1 = pca1.fit_transform(sugDocHigh)
-    transformed2 = pca2.fit_transform(sugDocLow)
+    pca, transformed = pca_transformed(input_word)
+    pca1, transformed1 = pca_transformed(high_report)
+    pca2, transformed2 = pca_transformed(low_report)
 
     # 主成分をプロットする
     fig = plt.figure()
@@ -53,4 +52,5 @@ def main():
 
 
 if __name__ == '__main__':
+    reports_vector = load_pickle('./report_vector.pickle')
     main()
