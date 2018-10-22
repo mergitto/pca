@@ -25,6 +25,24 @@ def show_result(pca_1, pca_2, pca_1_explain="", pca_2_explain=""):
     print(pca_2_explain,':各次元の寄与率{0}'.format(pca_2.explained_variance_ratio_))
     print(pca_2_explain,':累積寄与率{0}'.format(sum(pca_2.explained_variance_ratio_)))
 
+def to_scatter(transformed, transformed_1, transformed_2):
+    # 主成分をプロットする
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    ax.scatter(transformed[:, 0], transformed[:, 1], c="blue", label="input", marker="o") # 入力の主成分分析
+    ax.scatter(transformed_1[:, 0], transformed_1[:, 1], c="red", label="high", marker="^") # 適合報告書の主成分分析
+    ax.scatter(transformed_2[:, 0], transformed_2[:, 1], c="green", label="low", marker="s") # 非適合報告書の主成分分析
+    ax.set_title('検索ワードと評価の高低による主成分分析')
+    ax.set_xlabel('pc1')
+    ax.set_ylabel('pc2')
+
+    ax.legend(loc='upper right')
+
+    # グラフを表示する
+    #plt.savefig('all.pdf', format="pdf", dpi=300)
+    plt.show()
+
 
 def main():
     input_word = reports_vector['input_word'] # 入力のベクトル
@@ -35,24 +53,9 @@ def main():
     pca1, transformed1 = pca_transformed(high_report)
     pca2, transformed2 = pca_transformed(low_report)
 
-    # 主成分をプロットする
-    fig = plt.figure()
-    ax = fig.add_subplot(1,1,1)
-
-    ax.scatter(transformed[:, 0], transformed[:, 1], c="blue", label="input", marker="o") # 入力の主成分分析
-    ax.scatter(transformed1[:, 0], transformed1[:, 1], c="red", label="high", marker="^") # 適合報告書の主成分分析
-    ax.scatter(transformed2[:, 0], transformed2[:, 1], c="green", label="low", marker="s") # 非適合報告書の主成分分析
-    ax.set_title('検索ワードと評価の高低による主成分分析')
-    ax.set_xlabel('pc1')
-    ax.set_ylabel('pc2')
-
-    ax.legend(loc='upper right')
-
     show_result(pca1, pca2, pca_1_explain="High", pca_2_explain="Low")
+    to_scatter(transformed, transformed1, transformed2)
 
-    # グラフを表示する
-    #plt.savefig('all.pdf', format="pdf", dpi=300)
-    plt.show()
 
 
 if __name__ == '__main__':
