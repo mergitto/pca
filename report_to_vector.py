@@ -40,6 +40,6 @@ if __name__ == '__main__':
     reports_vector['input_word'].append(SHIKAKU)
     reports_vector['input_word'].append(SHIKAKU)
 
-    dump_pickle(reports_vector, 'report_vector.pickle')
+    dump_pickle(reports_vector, 'report_vector_shikaku.pickle')
 
 
