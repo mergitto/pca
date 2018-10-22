@@ -53,5 +53,17 @@ def calc_pca(reports_vector=None, input_word=""):
     to_scatter(transformed, transformed1, transformed2, title=input_word)
 
 if __name__ == '__main__':
-    reports_vector = load_pickle('./report_vector_shikaku.pickle')
+    reports_vector = load_pickle('./pickle_data/report_vector_shikaku.pickle')
     calc_pca(reports_vector=reports_vector, input_word="資格")
+
+    reports_vector = load_pickle('./pickle_data/report_vector_spi.pickle')
+    calc_pca(reports_vector=reports_vector, input_word="spi")
+
+    reports_vector = load_pickle('./pickle_data/report_vector_mensetsu.pickle')
+    calc_pca(reports_vector=reports_vector, input_word="面接")
+
+    #reports_vector = load_pickle('./pickle_data/advice_communication.pickle')
+    #calc_pca(reports_vector=reports_vector, input_word="コミュニケーション")
+
+    #reports_vector = load_pickle('./pickle_data/advice_resume.pickle')
+    #calc_pca(reports_vector=reports_vector, input_word="履歴書")
