@@ -44,14 +44,14 @@ def to_scatter(transformed, transformed_1, transformed_2, title=""):
     plt.show()
 
 
-def main():
+def calc_pca(reports_vector=None, input_word=""):
     pca, transformed = pca_transformed(reports_vector['input_word'])
     pca1, transformed1 = pca_transformed(reports_vector['high'])
     pca2, transformed2 = pca_transformed(reports_vector['low'])
 
     show_result(pca1, pca2, pca_1_explain="High", pca_2_explain="Low")
-    to_scatter(transformed, transformed1, transformed2, title="資格")
+    to_scatter(transformed, transformed1, transformed2, title=input_word)
 
 if __name__ == '__main__':
     reports_vector = load_pickle('./report_vector_shikaku.pickle')
-    main()
+    calc_pca(reports_vector=reports_vector, input_word="資格")
