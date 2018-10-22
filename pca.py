@@ -45,18 +45,12 @@ def to_scatter(transformed, transformed_1, transformed_2):
 
 
 def main():
-    input_word = reports_vector['input_word'] # 入力のベクトル
-    high_report = reports_vector['high'] # 適合報告書のベクトル和
-    low_report = reports_vector['low'] # 非適合報告書のベクトル和
-
-    pca, transformed = pca_transformed(input_word)
-    pca1, transformed1 = pca_transformed(high_report)
-    pca2, transformed2 = pca_transformed(low_report)
+    pca, transformed = pca_transformed(reports_vector['input_word'])
+    pca1, transformed1 = pca_transformed(reports_vector['high'])
+    pca2, transformed2 = pca_transformed(reports_vector['low'])
 
     show_result(pca1, pca2, pca_1_explain="High", pca_2_explain="Low")
     to_scatter(transformed, transformed1, transformed2)
-
-
 
 if __name__ == '__main__':
     reports_vector = load_pickle('./report_vector.pickle')
