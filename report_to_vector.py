@@ -24,19 +24,23 @@ def load_advice():
     with open("./advice_classification_2.pickle", 'rb') as f:
         return pickle.load(f)
 
-def dump_pickle(data, save_file_name):
-    with open(save_file_name, 'wb') as f:
-        pickle.dump(data, f)
-
-if __name__ == '__main__':
-    reports = load_advice()
+def pluck_vector_sum(reports):
     reports_vector = defaultdict(list)
     for report in reports.values():
         if report['evaluation'] == 'high':
             reports_vector['high'].append(report['vectorSum'])
         else:
             reports_vector['low'].append(report['vectorSum'])
+    return reports_vector
 
+def dump_pickle(data, save_file_name):
+    with open(save_file_name, 'wb') as f:
+        pickle.dump(data, f)
+
+if __name__ == '__main__':
+    reports = load_advice()
+
+    reports_vector = pluck_vector_sum
     reports_vector['input_word'].append(SHIKAKU)
     reports_vector['input_word'].append(SHIKAKU)
 
