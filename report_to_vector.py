@@ -17,7 +17,8 @@ def pluck_vector_sum(reports):
     return reports_vector
 
 def add_vector(dictionary, key=None, value=None):
-    return dictionary['input_word'].append(SHIKAKU)
+    dictionary['input_word'].append(SHIKAKU)
+    dictionary['input_word'].append(SHIKAKU)
 
 def dump_pickle(data, save_file_name):
     with open(save_file_name, 'wb') as f:
@@ -27,7 +28,6 @@ if __name__ == '__main__':
     reports = load_advice()
 
     reports_vector = pluck_vector_sum(reports)
-    add_vector(reports_vector, key='input_word', value=SHIKAKU)
     add_vector(reports_vector, key='input_word', value=SHIKAKU)
 
     dump_pickle(reports_vector, 'report_vector_shikaku.pickle')
