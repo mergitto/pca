@@ -18,6 +18,14 @@ def pca_transformed(vector):
      transformed = pca.fit_transform(vector)
      return pca, transformed
 
+def show_result(pca_1, pca_2, pca_1_explain="", pca_2_explain=""):
+    # 主成分の次元ごとの寄与率を出力する
+    print(pca_1_explain,':各次元の寄与率{0}'.format(pca_1.explained_variance_ratio_))
+    print(pca_1_explain,':累積寄与率{0}'.format(sum(pca_1.explained_variance_ratio_)))
+    print(pca_2_explain,':各次元の寄与率{0}'.format(pca_2.explained_variance_ratio_))
+    print(pca_2_explain,':累積寄与率{0}'.format(sum(pca_2.explained_variance_ratio_)))
+
+
 def main():
     input_word = reports_vector['input_word'] # 入力のベクトル
     high_report = reports_vector['high'] # 適合報告書のベクトル和
@@ -40,11 +48,7 @@ def main():
 
     ax.legend(loc='upper right')
 
-    # 主成分の次元ごとの寄与率を出力する
-    print('High:各次元の寄与率{0}'.format(pca1.explained_variance_ratio_))
-    print('High:累積寄与率{0}'.format(sum(pca1.explained_variance_ratio_)))
-    print('Low:各次元の寄与率{0}'.format(pca2.explained_variance_ratio_))
-    print('Low:累積寄与率{0}'.format(sum(pca2.explained_variance_ratio_)))
+    show_result(pca1, pca2, pca_1_explain="High", pca_2_explain="Low")
 
     # グラフを表示する
     #plt.savefig('all.pdf', format="pdf", dpi=300)
