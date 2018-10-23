@@ -40,7 +40,7 @@ def to_scatter(transformed, transformed_1, transformed_2, title=""):
     ax.legend(loc='upper right')
 
     # グラフを表示する
-    #plt.savefig('all.pdf', format="pdf", dpi=300)
+    plt.savefig('./images/pca_'+title+'.pdf', format="pdf", dpi=300)
     plt.show()
 
 
