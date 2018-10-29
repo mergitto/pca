@@ -28,16 +28,26 @@ if __name__ == '__main__':
     reports = load_advice("./advice_classification_2.pickle")
     reports_vector = pluck_vector_sum(reports)
     add_vector(reports_vector, key='input_word', value=SHIKAKU)
-    dump_pickle(reports_vector, 'report_vector_shikaku.pickle')
+    dump_pickle(reports_vector, './pickle_data/report_vector_shikaku.pickle')
 
     reports = load_advice("./pickle_data/advice_spi_tfidf.pickle")
     reports_vector = pluck_vector_sum(reports)
     add_vector(reports_vector, key='input_word', value=SPI)
-    dump_pickle(reports_vector, 'report_vector_spi.pickle')
+    dump_pickle(reports_vector, './pickle_data/report_vector_spi.pickle')
 
     reports = load_advice("./pickle_data/advice_mensetsu_tfidf.pickle")
     reports_vector = pluck_vector_sum(reports)
     add_vector(reports_vector, key='input_word', value=MENSETSU)
-    dump_pickle(reports_vector, 'report_vector_mensetsu.pickle')
+    dump_pickle(reports_vector, './pickle_data/report_vector_mensetsu.pickle')
+
+    reports = load_advice("./pickle_data/advice_resume_tfidf.pickle")
+    reports_vector = pluck_vector_sum(reports)
+    add_vector(reports_vector, key='input_word', value=MENSETSU)
+    dump_pickle(reports_vector, './pickle_data/report_vector_resume.pickle')
+
+    reports = load_advice("./pickle_data/advice_communication_tfidf.pickle")
+    reports_vector = pluck_vector_sum(reports)
+    add_vector(reports_vector, key='input_word', value=MENSETSU)
+    dump_pickle(reports_vector, './pickle_data/report_vector_communication.pickle')
 
 

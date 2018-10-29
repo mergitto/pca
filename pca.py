@@ -62,8 +62,8 @@ if __name__ == '__main__':
     reports_vector = load_pickle('./pickle_data/report_vector_mensetsu.pickle')
     calc_pca(reports_vector=reports_vector, input_word="面接")
 
-    #reports_vector = load_pickle('./pickle_data/advice_communication.pickle')
-    #calc_pca(reports_vector=reports_vector, input_word="コミュニケーション")
+    reports_vector = load_pickle('./pickle_data/report_vector_communication.pickle')
+    calc_pca(reports_vector=reports_vector, input_word="コミュニケーション")
 
-    #reports_vector = load_pickle('./pickle_data/advice_resume.pickle')
-    #calc_pca(reports_vector=reports_vector, input_word="履歴書")
+    reports_vector = load_pickle('./pickle_data/report_vector_resume.pickle')
+    calc_pca(reports_vector=reports_vector, input_word="履歴書")
