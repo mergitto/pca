@@ -20,6 +20,7 @@ def pca_transformed(vector):
 
 def show_result(pca_1, pca_2, pca_1_explain="", pca_2_explain=""):
     # 主成分の次元ごとの寄与率を出力する
+    print("==========================")
     print(pca_1_explain,':各次元の寄与率{0}'.format(pca_1.explained_variance_ratio_))
     print(pca_1_explain,':累積寄与率{0}'.format(sum(pca_1.explained_variance_ratio_)))
     print(pca_2_explain,':各次元の寄与率{0}'.format(pca_2.explained_variance_ratio_))
