@@ -24,6 +24,16 @@ def pluck_vector_sum(reports):
             reports_vector['low'].append(report['vectorSum'])
     return reports_vector
 
+def reports_type_shokushu_vector(reports):
+    type_vector = defaultdict(list)
+    shokushu_vector = defaultdict(list)
+    for report in reports.values():
+        c_type = report['companyType']
+        c_shokushu = report['companyShokushu']
+        type_vector[c_type].append(report['vectorSum'])
+        shokushu_vector[c_shokushu].append(report['vectorSum'])
+    return type_vector, shokushu_vector
+
 def add_vector(dictionary, key=None, value=None):
     dictionary[key].append(value)
     dictionary[key].append(value)
@@ -34,8 +44,11 @@ def dump_pickle(data, save_file_name):
 
 if __name__ == '__main__':
     reports = load_advice("./pickle_data/advice_2_tfidf.pickle")
+    type_vector, shokushu_vector = reports_type_shokushu_vector(reports)
     reports_vector = pluck_vector_sum(reports)
     dump_pickle(reports_vector, './pickle_data/report_vector_all.pickle')
+    dump_pickle(type_vector, './pickle_data/type_vector_all.pickle')
+    dump_pickle(shokushu_vector, './pickle_data/shokushu_vector_all.pickle')
 
     reports = load_advice("./advice_classification_2.pickle")
     reports_vector = pluck_vector_sum(reports)
