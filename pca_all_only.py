@@ -61,3 +61,6 @@ if __name__ == '__main__':
     shokushu_vector = load_pickle('./pickle_data/shokushu_vector_all.pickle')
     calc_pca(shokushu_vector, input_word="職種")
 
+    cluster_vector = load_pickle('./pickle_data/clusters_vector_all.pickle')
+    calc_pca(cluster_vector, input_word="クラスタ")
+

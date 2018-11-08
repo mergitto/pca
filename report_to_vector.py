@@ -35,6 +35,14 @@ def reports_type_shokushu_vector(reports):
         shokushu_vector[c_shokushu].append(report['vectorSum'])
     return type_vector, shokushu_vector
 
+def reports_cluster_vector(reports):
+    clusters_vector = defaultdict(list)
+    for report in reports.values():
+        if type(report['vectorSum']) is int: continue
+        cluster_number = report['cluster']
+        clusters_vector[str(cluster_number)].append(report['vectorSum'])
+    return clusters_vector
+
 def add_vector(dictionary, key=None, value=None):
     dictionary[key].append(value)
     dictionary[key].append(value)
@@ -50,6 +58,10 @@ if __name__ == '__main__':
     dump_pickle(reports_vector, './pickle_data/report_vector_all.pickle')
     dump_pickle(type_vector, './pickle_data/type_vector_all.pickle')
     dump_pickle(shokushu_vector, './pickle_data/shokushu_vector_all.pickle')
+
+    reports_with_cluster = load_advice("./pickle_data/advice_2_cluster.pickle")
+    clusters_vector = reports_cluster_vector(reports_with_cluster)
+    dump_pickle(clusters_vector, './pickle_data/clusters_vector_all.pickle')
 
     reports = load_advice("./advice_classification_2.pickle")
     reports_vector = pluck_vector_sum(reports)
