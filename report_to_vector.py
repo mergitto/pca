@@ -28,6 +28,7 @@ def reports_type_shokushu_vector(reports):
     type_vector = defaultdict(list)
     shokushu_vector = defaultdict(list)
     for report in reports.values():
+        if type(report['vectorSum']) is int: continue
         c_type = report['companyType']
         c_shokushu = report['companyShokushu']
         type_vector[c_type].append(report['vectorSum'])

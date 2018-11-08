@@ -19,17 +19,19 @@ def pca_transformed(vector):
      return pca, transformed
 
 def show_result(pca, pca_explain=""):
-    # 主成分の次元ごとの寄与率を出力する
-    print("==========================")
-    print(pca_explain,':各次元の寄与率{0}'.format(pca.explained_variance_ratio_))
-    print(pca_explain,':累積寄与率{0}'.format(sum(pca.explained_variance_ratio_)))
+    for key in pca:
+        # 主成分の次元ごとの寄与率を出力する
+        print("============   "+key+"  ==============")
+        print(pca_explain,':各次元の寄与率{0}'.format(pca[key].explained_variance_ratio_))
+        print(pca_explain,':累積寄与率{0}'.format(sum(pca[key].explained_variance_ratio_)))
 
 def to_scatter(transformed, title=""):
     # 主成分をプロットする
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
 
-    ax.scatter(transformed[:, 0], transformed[:, 1], c="blue", label=title, marker="^") # 適合報告書の主成分分析
+    for key in transformed:
+        ax.scatter(transformed[key][:, 0], transformed[key][:, 1], label=key, marker="^") # 適合報告書の主成分分析
     ax.set_title('「'+title+'」の報告書による主成分分析')
     ax.set_xlabel('pc1')
     ax.set_ylabel('pc2')
@@ -42,7 +44,10 @@ def to_scatter(transformed, title=""):
 
 
 def calc_pca(reports_vector=None, input_word=""):
-    pca, transformed = pca_transformed(reports_vector['advice_vector'])
+    pca = {}
+    transformed = {}
+    for key in reports_vector.keys():
+        pca[key], transformed[key] = pca_transformed(reports_vector[key])
 
     show_result(pca, pca_explain="ALL")
     to_scatter(transformed, title=input_word)
@@ -50,3 +55,9 @@ def calc_pca(reports_vector=None, input_word=""):
 if __name__ == '__main__':
     reports_vector = load_pickle('./pickle_data/report_vector_all.pickle')
     calc_pca(reports_vector=reports_vector, input_word="全部")
+
+    type_vector = load_pickle('./pickle_data/type_vector_all.pickle')
+    calc_pca(type_vector, input_word="業種")
+    shokushu_vector = load_pickle('./pickle_data/shokushu_vector_all.pickle')
+    calc_pca(shokushu_vector, input_word="職種")
+
